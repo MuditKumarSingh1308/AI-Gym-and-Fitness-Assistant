@@ -1,0 +1,49 @@
+services:
+  - type: web
+    name: ai-gym-backend
+    env: python
+    rootDir: fastapi-backend
+    plan: starter
+    autoDeploy: true
+    healthCheckPath: /health
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: APP_NAME
+        value: AI Gym Fitness Assistant API
+      - key: ENVIRONMENT
+        value: production
+      - key: DEBUG
+        value: "false"
+      - key: API_V1_PREFIX
+        value: /api/v1
+      - key: SECRET_KEY
+        sync: false
+      - key: JWT_ALGORITHM
+        value: HS256
+      - key: ACCESS_TOKEN_EXPIRE_MINUTES
+        value: "30"
+      - key: REFRESH_TOKEN_EXPIRE_DAYS
+        value: "14"
+      - key: MONGODB_URI
+        sync: false
+      - key: MONGODB_DB_NAME
+        value: ai_gym_fitness
+      - key: BACKEND_CORS_ORIGINS
+        value: https://your-frontend-domain.vercel.app,http://localhost:3000
+      - key: LLM_API_KEY
+        sync: false
+      - key: LLM_MODEL
+        value: gpt-4o-mini
+      - key: LLM_API_BASE
+        value: https://api.openai.com/v1
+      - key: LLM_TEMPERATURE
+        value: "0.6"
+      - key: NEARBY_GYM_PROVIDER
+        value: mock
+      - key: STORAGE_PROVIDER
+        value: firebase
+      - key: STORAGE_BUCKET
+        value: ai-gym-fitness-media
+      - key: STORAGE_REGION
+        value: us-central1
