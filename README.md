@@ -1,5 +1,9 @@
 # AI Gym & Fitness Assistant
 
+[![MIT License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![Next.js](https://img.shields.io/badge/frontend-Next.js-000000.svg)](https://nextjs.org/)
+[![FastAPI](https://img.shields.io/badge/backend-FastAPI-009688.svg)](https://fastapi.tiangolo.com/)
+
 AI Gym & Fitness Assistant is a portfolio-ready fitness platform that combines workout coaching, diet planning, habit intelligence, gym discovery, analytics, and a conversational AI buddy in one product.
 
 ## Short Description
