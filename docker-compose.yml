@@ -40,10 +40,9 @@ services:
       MONGODB_URI: mongodb://mongo:27017
       MONGODB_DB_NAME: ${MONGODB_DB_NAME:-ai_gym_fitness}
       BACKEND_CORS_ORIGINS: ${BACKEND_CORS_ORIGINS:-["http://localhost:3000"]}
-      LLM_API_KEY: ${LLM_API_KEY:-}
-      LLM_MODEL: ${LLM_MODEL:-gpt-4o-mini}
-      LLM_API_BASE: ${LLM_API_BASE:-https://api.openai.com/v1}
-      LLM_TEMPERATURE: ${LLM_TEMPERATURE:-0.6}
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      GEMINI_MODEL: ${GEMINI_MODEL:-gemini-2.5-flash}
+      GEMINI_TEMPERATURE: ${GEMINI_TEMPERATURE:-0.6}
       NEARBY_GYM_PROVIDER: ${NEARBY_GYM_PROVIDER:-mock}
     ports:
       - "8000:8000"

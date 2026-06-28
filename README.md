@@ -25,7 +25,7 @@ The project pairs a modern Next.js frontend with a FastAPI backend, MongoDB Atla
 - Frontend: Next.js, TypeScript, TailwindCSS, Plotly
 - Backend: FastAPI, Pydantic, JWT, async MongoDB
 - ML / CV: MediaPipe, OpenCV, scikit-learn, XGBoost, TensorFlow/PyTorch-compatible pipelines
-- Chatbot: LLM API integration
+- Chatbot: Google Gemini 2.5 Flash via the official Google Gen AI SDK
 - Storage: Firebase Storage or S3-compatible storage
 - Deployment: Vercel, Render, MongoDB Atlas, Docker, Docker Compose
 
@@ -104,8 +104,9 @@ Common variables:
 - `JWT_SECRET_KEY`
 - `JWT_ALGORITHM`
 - `BACKEND_CORS_ORIGINS`
-- `LLM_API_KEY`
-- `LLM_MODEL`
+- `GEMINI_API_KEY`
+- `GEMINI_MODEL`
+- `GEMINI_TEMPERATURE`
 - `NEXT_PUBLIC_API_BASE_URL`
 - `NEXT_PUBLIC_APP_NAME`
 - `STORAGE_PROVIDER`
@@ -129,7 +130,7 @@ Swagger UI is available at `http://localhost:8000/docs` when the FastAPI backend
 ## Deployment Guide
 
 - Frontend: deploy `frontend/` to Vercel.
-- Backend: deploy `fastapi-backend/` to Render.
+- Backend: deploy `fastapi-backend/` to Render and set `GEMINI_API_KEY` for Gemini-based chat features.
 - Database: use MongoDB Atlas in production.
 - Storage: use Firebase Storage or an S3-compatible bucket.
 - CI/CD: run GitHub Actions for lint, tests, and build verification.

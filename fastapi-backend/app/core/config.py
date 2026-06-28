@@ -1,7 +1,6 @@
 from functools import lru_cache
-import os
-import secrets
 import json
+import secrets
 
 from pydantic import AnyHttpUrl
 from pydantic import Field
@@ -26,10 +25,9 @@ class Settings(BaseSettings):
 
     BACKEND_CORS_ORIGINS: list[AnyHttpUrl | str] = ["http://localhost:3000", "http://localhost:5173"]
 
-    LLM_API_KEY: str | None = None
-    LLM_MODEL: str = "gpt-4o-mini"
-    LLM_API_BASE: str = "https://api.openai.com/v1"
-    LLM_TEMPERATURE: float = 0.6
+    GEMINI_API_KEY: str | None = None
+    GEMINI_MODEL: str = "gemini-2.5-flash"
+    GEMINI_TEMPERATURE: float = 0.6
     NEARBY_GYM_PROVIDER: str = "mock"
     STORAGE_PROVIDER: str = "firebase"
     STORAGE_BUCKET: str = "ai-gym-fitness-media"
@@ -53,8 +51,10 @@ class Settings(BaseSettings):
 
     @model_validator(mode="after")
     def validate_production_settings(self) -> "Settings":
-        if self.ENVIRONMENT.lower() == "production" and not os.getenv("SECRET_KEY"):
+        if self.ENVIRONMENT.lower() == "production" and not self.SECRET_KEY:
             raise ValueError("SECRET_KEY must be set to a secure value in production")
+        if self.ENVIRONMENT.lower() == "production" and not self.GEMINI_API_KEY:
+            raise ValueError("GEMINI_API_KEY must be set in production")
         return self
 
 

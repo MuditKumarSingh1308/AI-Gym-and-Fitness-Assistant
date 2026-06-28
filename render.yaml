@@ -31,13 +31,11 @@ services:
         value: ai_gym_fitness
       - key: BACKEND_CORS_ORIGINS
         value: https://your-frontend-domain.vercel.app,http://localhost:3000
-      - key: LLM_API_KEY
+      - key: GEMINI_API_KEY
         sync: false
-      - key: LLM_MODEL
-        value: gpt-4o-mini
-      - key: LLM_API_BASE
-        value: https://api.openai.com/v1
-      - key: LLM_TEMPERATURE
+      - key: GEMINI_MODEL
+        value: gemini-2.5-flash
+      - key: GEMINI_TEMPERATURE
         value: "0.6"
       - key: NEARBY_GYM_PROVIDER
         value: mock

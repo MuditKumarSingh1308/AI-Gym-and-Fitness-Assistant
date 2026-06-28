@@ -74,10 +74,9 @@ Set these in the Render dashboard or via `render.yaml`:
 - `MONGODB_URI` with your MongoDB Atlas connection string
 - `MONGODB_DB_NAME`
 - `BACKEND_CORS_ORIGINS` as a comma-separated list or JSON array
-- `LLM_API_KEY`
-- `LLM_MODEL`
-- `LLM_API_BASE`
-- `LLM_TEMPERATURE`
+- `GEMINI_API_KEY`
+- `GEMINI_MODEL`
+- `GEMINI_TEMPERATURE`
 - `NEARBY_GYM_PROVIDER`
 - `STORAGE_PROVIDER`
 - `STORAGE_BUCKET`
@@ -98,6 +97,10 @@ pip install -r requirements.txt
 ### Health check
 
 Use `/health` for Render health checks.
+
+### Gemini API
+
+The chatbot uses the official Google Gen AI SDK with `gemini-2.5-flash`. Set `GEMINI_API_KEY` to a valid Gemini API key for chatbot responses.
 
 ### MongoDB Atlas
 
