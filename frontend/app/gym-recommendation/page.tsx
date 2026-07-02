@@ -102,10 +102,10 @@ export default function Page() {
                         <p className="font-semibold">{gym.name}</p>
                         <p className="mt-1 text-sm text-muted-foreground">{gym.address}</p>
                       </div>
-                      <span className="rounded-full border border-border px-3 py-1 text-xs text-muted-foreground">{gym.distance_km.toFixed(1)} km</span>
+                      <span className="rounded-full border border-border px-3 py-1 text-xs text-muted-foreground">{Number(gym.distance_km ?? 0).toFixed(1)} km</span>
                     </div>
                     <div className="mt-3 grid grid-cols-2 gap-3 text-sm text-muted-foreground">
-                      <p>Rating: {gym.rating.toFixed(1)}</p>
+                      <p>Rating: {Number(gym.rating ?? 0).toFixed(1)}</p>
                       <p>Match: {Math.round((gym.equipment_match_score ?? 0) * 100)}%</p>
                     </div>
                   </article>

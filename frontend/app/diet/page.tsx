@@ -30,6 +30,17 @@ type FormState = {
   cuisine_preference: string;
 };
 
+type DietMeal = {
+  meal_type: string;
+  name: string;
+  calories: number;
+  items: string[];
+};
+
+type GroceryItemList = {
+  items: string[];
+};
+
 const initialForm: FormState = {
   age: 28,
   height_cm: 172,
@@ -45,7 +56,7 @@ const initialForm: FormState = {
 export default function Page() {
   const [form, setForm] = useState(initialForm);
   const [plan, setPlan] = useState<DietPlan | null>(null);
-  const [grocery, setGrocery] = useState<GroceryList | null>(null);
+  const [grocery, setGrocery] = useState<GroceryList | GroceryItemList | null>(null);
   const [bmi, setBmi] = useState<{ bmi: number; category: string } | null>(null);
   const [calories, setCalories] = useState<{ bmr: number; tdee: number; daily_calorie_target: number; macro_targets: Record<string, number> } | null>(null);
   const [isPending, startTransition] = useTransition();
@@ -162,7 +173,7 @@ export default function Page() {
                   <Metric label="TDEE" value={`${Math.round(plan.tdee)} kcal`} />
                 </div>
                 <div className="grid gap-3">
-                  {plan.meals.map((meal) => (
+                  {((plan.meals ?? []) as DietMeal[]).map((meal) => (
                     <article key={`${meal.meal_type}-${meal.name}`} className="rounded-[22px] border border-border bg-background p-4">
                       <div className="flex items-center justify-between gap-3">
                         <div>
@@ -178,7 +189,7 @@ export default function Page() {
                 <div className="rounded-[22px] border border-border bg-background p-4">
                   <p className="font-semibold">Grocery list</p>
                   <div className="mt-3 grid gap-2 text-sm text-muted-foreground sm:grid-cols-2">
-                    {grocery?.items?.map((item) => (
+                    {grocery?.items?.map((item: string) => (
                       <span key={item} className="rounded-full border border-border px-3 py-2">
                         {item}
                       </span>

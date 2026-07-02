@@ -190,7 +190,7 @@ export default function Page() {
                 <article key={session.id ?? `${session.exercise_type}-${session.created_at}`} className="rounded-[22px] border border-border bg-background p-4">
                   <div className="flex items-center justify-between gap-3">
                     <div>
-                      <p className="font-semibold capitalize">{session.exercise_type.replaceAll("_", " ")}</p>
+                      <p className="font-semibold capitalize">{(session.exercise_type ?? "workout").replaceAll("_", " ")}</p>
                       <p className="text-sm text-muted-foreground">{session.status}</p>
                     </div>
                     <span className="rounded-full border border-border px-3 py-1 text-xs text-muted-foreground">{Math.round(session.form_score ?? 0)}% form</span>

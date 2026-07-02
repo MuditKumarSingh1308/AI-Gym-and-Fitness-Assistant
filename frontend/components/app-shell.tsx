@@ -19,7 +19,7 @@ import {
 } from "lucide-react";
 
 import { clearStoredAuth, getStoredUser } from "@/lib/api";
-import { useTheme } from "@/components/providers/theme-provider";
+import { ThemeProvider, useTheme } from "@/components/providers/theme-provider";
 
 const navItems = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -33,6 +33,14 @@ const navItems = [
 ];
 
 export function AppShell({ children }: { children: ReactNode }) {
+  return (
+    <ThemeProvider>
+      <AppShellInner>{children}</AppShellInner>
+    </ThemeProvider>
+  );
+}
+
+function AppShellInner({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
   const { theme, toggleTheme } = useTheme();

@@ -165,7 +165,7 @@ export default function Page() {
                 history.slice(0, 3).map((entry) => (
                   <div key={entry.id ?? entry.prediction_date} className="rounded-[22px] border border-border bg-background p-4 text-sm">
                     <p className="font-semibold">{entry.prediction_date}</p>
-                    <p className="mt-2 text-muted-foreground">{entry.prediction.motivation_recommendation}</p>
+                    <p className="mt-2 text-muted-foreground">{entry.prediction?.motivation_recommendation ?? "Prediction details will appear here after the first run."}</p>
                   </div>
                 ))
               ) : (

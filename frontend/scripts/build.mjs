@@ -5,7 +5,6 @@ import { spawnSync } from "node:child_process";
 
 const projectDir = process.cwd();
 const isOneDriveWorkspace = process.platform === "win32" && projectDir.toLowerCase().includes("onedrive");
-const tempBuildDir = path.join(os.tmpdir(), "ai-gym-assistant-next-build");
 
 function copyWorkspace(sourceDir, destinationDir) {
   if (process.platform === "win32") {
@@ -29,9 +28,17 @@ function copyWorkspace(sourceDir, destinationDir) {
       throw new Error(`robocopy failed copying workspace with code ${workspaceCopy.status ?? 1}`);
     }
 
+    const sourceNodeModules = path.join(sourceDir, "node_modules");
+    const destinationNodeModules = path.join(destinationDir, "node_modules");
+    if (!fs.existsSync(sourceNodeModules)) {
+      throw new Error(`Missing node_modules at ${sourceNodeModules}`);
+    }
+    if (fs.existsSync(destinationNodeModules)) {
+      fs.rmSync(destinationNodeModules, { recursive: true, force: true });
+    }
     const nodeModulesCopy = spawnSync("robocopy", [
-      path.join(sourceDir, "node_modules"),
-      path.join(destinationDir, "node_modules"),
+      sourceNodeModules,
+      destinationNodeModules,
       "/E",
       "/NFL",
       "/NDL",
@@ -39,7 +46,6 @@ function copyWorkspace(sourceDir, destinationDir) {
       "/NJS",
       "/NP",
     ], { stdio: "ignore" });
-
     if ((nodeModulesCopy.status ?? 0) >= 8) {
       throw new Error(`robocopy failed copying node_modules with code ${nodeModulesCopy.status ?? 1}`);
     }
@@ -68,11 +74,7 @@ function stageBuildWorkspace() {
     return projectDir;
   }
 
-  try {
-    fs.rmSync(tempBuildDir, { recursive: true, force: true });
-  } catch {
-    // The temp workspace can stay in place if Windows/OneDrive still has it open.
-  }
+  const tempBuildDir = fs.mkdtempSync(path.join(os.tmpdir(), "ai-gym-assistant-next-build-"));
   fs.mkdirSync(tempBuildDir, { recursive: true });
   copyWorkspace(projectDir, tempBuildDir);
   return tempBuildDir;
@@ -83,10 +85,16 @@ const nextBin = process.platform === "win32"
   ? path.join(projectDir, "node_modules", ".bin", "next.cmd")
   : path.join(projectDir, "node_modules", ".bin", "next");
 
-const result = spawnSync(process.execPath, [nextBin, "build"], {
-  cwd: buildDir,
-  env: process.env,
-  stdio: "inherit",
-});
+const result = process.platform === "win32"
+  ? spawnSync("cmd", ["/c", nextBin, "build", "--webpack", "--experimental-build-mode", "compile"], {
+      cwd: buildDir,
+      env: process.env,
+      stdio: "inherit",
+    })
+  : spawnSync(nextBin, ["build", "--webpack", "--experimental-build-mode", "compile"], {
+      cwd: buildDir,
+      env: process.env,
+      stdio: "inherit",
+    });
 
 process.exit(result.status ?? 1);
