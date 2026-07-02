@@ -1,8 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, BarChart3, CheckCircle2, Dumbbell, MessageSquareMore, Shield, Sparkles, Target } from "lucide-react";
-
-import heroImage from "../src/assets/hero.png";
 
 const highlights = [
   { title: "Workout trainer", copy: "MediaPipe, OpenCV, rep counting, form correction, and pose overlays." },
@@ -16,21 +13,10 @@ const modules = ["Workout", "Diet", "Analytics", "Chatbot", "Habit Tracker", "Gy
 export default function Page() {
   return (
     <main className="min-h-screen bg-background text-foreground">
-      <section className="relative isolate overflow-hidden border-b border-border bg-slate-950 text-white">
-        <div className="pointer-events-none absolute inset-0 z-0">
-          <Image
-            src={heroImage}
-            alt="AI Gym illustration"
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover opacity-20"
-          />
-          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(2,6,23,0.15),rgba(2,6,23,0.88))]" />
-        </div>
-        <div className="relative z-10 mx-auto flex min-h-[calc(100vh-1px)] max-w-7xl flex-col justify-between gap-10 px-4 py-5 sm:px-6 lg:px-8">
-          <header className="relative z-10 flex items-center justify-between gap-4">
-            <Link href="/" className="flex items-center gap-3">
+      <section className="relative isolate border-b border-border bg-slate-950 text-white">
+        <div className="mx-auto flex min-h-[calc(100vh-1px)] max-w-7xl flex-col justify-between gap-10 px-4 py-5 sm:px-6 lg:px-8">
+          <header className="relative z-20 flex items-center justify-between gap-4">
+            <Link href="/" className="pointer-events-auto flex items-center gap-3">
               <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/10 text-sky-300 ring-1 ring-white/10">
                 <Sparkles className="h-5 w-5" />
               </div>
@@ -39,7 +25,7 @@ export default function Page() {
                 <p className="text-lg font-semibold">Next.js Frontend</p>
               </div>
             </Link>
-            <div className="flex items-center gap-2">
+            <div className="pointer-events-auto flex items-center gap-2">
               <Link href="/login" className="rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm font-medium text-white transition hover:bg-white/10">
                 Login
               </Link>
@@ -63,7 +49,7 @@ export default function Page() {
                 Workout coaching, diet planning, habit intelligence, gym recommendations, and admin analytics live in one responsive Next.js interface.
               </p>
 
-              <div className="mt-8 flex flex-wrap items-center gap-3">
+              <div className="pointer-events-auto mt-8 flex flex-wrap items-center gap-3">
                 <Link href="/dashboard" className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-slate-100">
                   Open dashboard
                   <ArrowRight className="h-4 w-4" />
@@ -89,24 +75,24 @@ export default function Page() {
             </div>
 
             <div className="relative z-10 grid gap-4">
-              <div className="rounded-[32px] border border-white/10 bg-white/5 p-4 shadow-2xl shadow-sky-950/40 backdrop-blur">
-              <Image
-                  src={heroImage}
-                  alt="AI Gym preview"
-                  width={900}
-                  height={700}
-                  sizes="(max-width: 1024px) 100vw, 45vw"
-                  loading="eager"
-                  className="h-[360px] w-full rounded-[24px] object-cover object-center"
-                />
-              </div>
-              <div className="grid gap-4 sm:grid-cols-2">
-                {highlights.map((item) => (
-                  <div key={item.title} className="rounded-[26px] border border-white/10 bg-slate-950/70 p-4">
-                    <p className="font-medium text-white">{item.title}</p>
-                    <p className="mt-2 text-sm leading-6 text-slate-300">{item.copy}</p>
+              <div className="rounded-[32px] border border-white/10 bg-white/5 p-6 shadow-2xl shadow-sky-950/40 backdrop-blur">
+                <div className="grid gap-4">
+                  <div className="rounded-[24px] border border-white/10 bg-slate-950/70 p-4">
+                    <p className="text-xs uppercase tracking-[0.24em] text-sky-200/80">Landing overview</p>
+                    <p className="mt-3 text-lg font-semibold text-white">Clean navigation, clear calls to action, and no overlay blocking clicks.</p>
+                    <p className="mt-2 text-sm leading-6 text-slate-300">
+                      The homepage now uses normal document flow only, so the hero content stays visible and the buttons remain interactive.
+                    </p>
                   </div>
-                ))}
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    {highlights.map((item) => (
+                      <div key={item.title} className="rounded-[26px] border border-white/10 bg-slate-950/70 p-4">
+                        <p className="font-medium text-white">{item.title}</p>
+                        <p className="mt-2 text-sm leading-6 text-slate-300">{item.copy}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
