@@ -17,10 +17,19 @@ export default function Page() {
   return (
     <main className="min-h-screen bg-background text-foreground">
       <section className="relative isolate overflow-hidden border-b border-border bg-slate-950 text-white">
-        <Image src={heroImage} alt="AI Gym illustration" fill priority className="object-cover opacity-20" />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(2,6,23,0.15),rgba(2,6,23,0.88))]" />
-        <div className="relative mx-auto flex min-h-[calc(100vh-1px)] max-w-7xl flex-col justify-between gap-10 px-4 py-5 sm:px-6 lg:px-8">
-          <header className="flex items-center justify-between gap-4">
+        <div className="pointer-events-none absolute inset-0 z-0">
+          <Image
+            src={heroImage}
+            alt="AI Gym illustration"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover opacity-20"
+          />
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(2,6,23,0.15),rgba(2,6,23,0.88))]" />
+        </div>
+        <div className="relative z-10 mx-auto flex min-h-[calc(100vh-1px)] max-w-7xl flex-col justify-between gap-10 px-4 py-5 sm:px-6 lg:px-8">
+          <header className="relative z-10 flex items-center justify-between gap-4">
             <Link href="/" className="flex items-center gap-3">
               <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/10 text-sky-300 ring-1 ring-white/10">
                 <Sparkles className="h-5 w-5" />
@@ -41,7 +50,7 @@ export default function Page() {
             </div>
           </header>
 
-          <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
+          <div className="relative z-10 grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
             <div className="max-w-3xl">
               <p className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs font-medium uppercase tracking-[0.24em] text-sky-200/80">
                 <Target className="h-3.5 w-3.5" />
@@ -79,7 +88,7 @@ export default function Page() {
               </div>
             </div>
 
-            <div className="grid gap-4">
+            <div className="relative z-10 grid gap-4">
               <div className="rounded-[32px] border border-white/10 bg-white/5 p-4 shadow-2xl shadow-sky-950/40 backdrop-blur">
               <Image
                   src={heroImage}
@@ -102,7 +111,7 @@ export default function Page() {
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center gap-2 border-t border-white/10 pt-5 text-sm text-slate-300">
+          <div className="relative z-10 flex flex-wrap items-center gap-2 border-t border-white/10 pt-5 text-sm text-slate-300">
             <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5">
               <Shield className="h-4 w-4 text-emerald-300" />
               JWT auth
