@@ -5,6 +5,7 @@ import { spawnSync } from "node:child_process";
 
 const projectDir = process.cwd();
 const isOneDriveWorkspace = process.platform === "win32" && projectDir.toLowerCase().includes("onedrive");
+const tempBuildDir = path.join(os.tmpdir(), "ai-gym-assistant-next-build");
 
 function copyWorkspace(sourceDir, destinationDir) {
   if (process.platform === "win32") {
@@ -74,7 +75,11 @@ function stageBuildWorkspace() {
     return projectDir;
   }
 
-  const tempBuildDir = fs.mkdtempSync(path.join(os.tmpdir(), "ai-gym-assistant-next-build-"));
+  try {
+    fs.rmSync(tempBuildDir, { recursive: true, force: true });
+  } catch {
+    // The temp workspace can stay in place if Windows/OneDrive still has it open.
+  }
   fs.mkdirSync(tempBuildDir, { recursive: true });
   copyWorkspace(projectDir, tempBuildDir);
   return tempBuildDir;
@@ -96,5 +101,33 @@ const result = process.platform === "win32"
       env: process.env,
       stdio: "inherit",
     });
+
+if (result.status === 0 && buildDir !== projectDir) {
+  const sourceNextDir = path.join(buildDir, ".next");
+  const destinationNextDir = path.join(projectDir, ".next");
+
+  if (process.platform === "win32") {
+    fs.rmSync(destinationNextDir, { recursive: true, force: true });
+    const copyResult = spawnSync("robocopy", [
+      sourceNextDir,
+      destinationNextDir,
+      "/E",
+      "/NFL",
+      "/NDL",
+      "/NJH",
+      "/NJS",
+      "/NP",
+    ], { stdio: "ignore" });
+    if ((copyResult.status ?? 0) >= 8) {
+      throw new Error(`robocopy failed copying .next with code ${copyResult.status ?? 1}`);
+    }
+  } else {
+    fs.rmSync(destinationNextDir, { recursive: true, force: true });
+    fs.cpSync(sourceNextDir, destinationNextDir, {
+      recursive: true,
+      dereference: true,
+    });
+  }
+}
 
 process.exit(result.status ?? 1);

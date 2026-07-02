@@ -1,7 +1,5 @@
 "use client";
 
-export const dynamic = "force-dynamic";
-
 export default function Error({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {
   return (
     <main className="flex min-h-screen items-center justify-center bg-background px-4 text-foreground">
@@ -20,4 +18,3 @@ export default function Error({ error, reset }: { error: Error & { digest?: stri
     </main>
   );
 }
-

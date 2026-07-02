@@ -3,6 +3,8 @@
 import { useState, useTransition } from "react";
 import { MapPinned, RefreshCw, Search, Target, Trophy } from "lucide-react";
 
+export const dynamic = "force-dynamic";
+
 import { AppShell } from "@/components/app-shell";
 import { PageHeader } from "@/components/page-header";
 import { SectionCard } from "@/components/section-card";

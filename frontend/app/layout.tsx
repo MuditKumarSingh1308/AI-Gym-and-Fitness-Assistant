@@ -3,6 +3,8 @@ import type { ReactNode } from "react";
 
 import "./globals.css";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "AI Gym & Fitness Assistant",
   description: "Production-ready Next.js frontend for workout coaching, diet planning, analytics, chatbot, habits, gym recommendations, and admin workflows.",

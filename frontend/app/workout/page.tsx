@@ -3,6 +3,8 @@
 import { useEffect, useMemo, useState, useTransition } from "react";
 import { Camera, CheckCircle2, Loader2, RefreshCw, SquareActivity, TimerReset, Video } from "lucide-react";
 
+export const dynamic = "force-dynamic";
+
 import { AppShell } from "@/components/app-shell";
 import { PageHeader } from "@/components/page-header";
 import { SectionCard } from "@/components/section-card";

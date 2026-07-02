@@ -3,6 +3,8 @@
 import { useEffect, useMemo, useState } from "react";
 import { BarChart3, Flame, RefreshCw, TrendingUp } from "lucide-react";
 
+export const dynamic = "force-dynamic";
+
 import { AppShell } from "@/components/app-shell";
 import { PageHeader } from "@/components/page-header";
 import { SectionCard } from "@/components/section-card";

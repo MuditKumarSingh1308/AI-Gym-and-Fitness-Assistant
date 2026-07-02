@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { ArrowRight, BarChart3, CheckCircle2, Dumbbell, MessageSquareMore, Shield, Sparkles, Target } from "lucide-react";
 
+export const dynamic = "force-dynamic";
+
 const highlights = [
   { title: "Workout trainer", copy: "MediaPipe, OpenCV, rep counting, form correction, and pose overlays." },
   { title: "Diet planner", copy: "BMI, BMR, calories, macros, Indian meal plans, and grocery lists." },

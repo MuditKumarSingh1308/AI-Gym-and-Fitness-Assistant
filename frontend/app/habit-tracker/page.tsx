@@ -3,6 +3,8 @@
 import { useEffect, useState, useTransition } from "react";
 import { CalendarHeart, Flame, Loader2, RefreshCw, ShieldAlert, TimerReset } from "lucide-react";
 
+export const dynamic = "force-dynamic";
+
 import { AppShell } from "@/components/app-shell";
 import { PageHeader } from "@/components/page-header";
 import { SectionCard } from "@/components/section-card";
